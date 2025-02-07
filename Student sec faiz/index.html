@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CMS</title>
+    <!-- ===== CSS Files ===== -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- <link rel="stylesheet" href="css/skins/color-1.css" /> -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <!-- ====== Style Switcher ====== -->
+    <!-- <link rel="stylesheet" href="css/style-switcher.css" /> -->
+  </head>
+  <body>
+    <!-- ===== Main Container Start ===== -->    <div class="main-container">
+      
+      <!-- ===== Aside Start ===== -->
+      <div class="aside">
+        <div class="logo">
+          <div class="profile-pic" id="profilePic">
+            <img id="profileImage" src="profilepic.png" alt="Profile Picture">
+             <!-- <img src="" alt=""> -->
+            <span class="add-icon">+</span>
+        </div>
+        <input type="file" id="fileInput" accept="image/*" style="display: none;">
+        <p class="name">Md Samiul Sayed</p>
+
+        </div>
+          <div class="nav-toggler">
+          <span></span>
+        </div>
+        <ul class="nav">
+          <!-- <li>
+            <a href="#home" class="active">
+               Home</a>
+          </li> -->
+          <li>
+            <a href="#about">Attendance Report</a>
+          </li>
+          <li>
+            <a href="#services">
+              <!-- <i class="fa fa-list"></i> -->
+              Complaint Managment</a>
+          </li>
+          <li>
+            <a href="#portfolio">
+              <!-- <i class="fa fa-briefcase"></i> -->
+              Internal Marks & assignment</a>
+          </li>
+          <li>
+            <a href="#contact">
+              <!-- <i class="fa fa-comments"></i> -->
+              Event Approval</a>
+          </li>
+          <li>
+            <a href="#update">
+              <!-- <i class="fa fa-comments"></i> -->
+              Update Profile</a>
+          </li>
+        </ul>
+      </div>
+      <!-- ===== Aside End ===== -->
+      <!-- ===== Main Content Start ===== -->
+      <div class="main-content">
+        <!-- ===== Home Section Start ===== -->
+        <!-- <section class="home active section" id="home">
+          <div class="container">
+            <div class="row">
+              <div class="home-info padd-15">
+               
+               
+              </div>
+          
+            </div>
+          <div class="row">
+            Student home Section
+          </div>
+          </div>
+        </section> -->
+        <!-- ===== Home Section End ===== -->
+        <!-- ===== Attendance Section Start ===== -->
+        
+        <section class="about section" id="about ">
+          <header>
+            <h2>कॉलेज प्रबंधन प्रणाली کالج مینیجمنٹ سسٹم</h2>
+            <h1>College Management System</h1>
+            <h3>Jamia Nagar, New Delhi-110025</h3>
+        </header>
+          <div class="container3">
+            <h1>Monthly Attendance Report</h1>
+            <div class="report-section">
+                <select id="monthSelector">
+                    <option value="January">January</option>
+                    <option value="February">February</option>
+                    <!-- Add other months -->
+                </select>
+                <button onclick="viewReport()">View Report</button>
+                <button onclick="downloadReport()">Download Report</button>
+            </div>
+            <table id="attendanceTable">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="attendanceData">
+                    <!-- Data will be loaded here by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <footer>
+          <div class="footer-container">
+
+              <div class="social-media">
+                  <h3>Connect with Us</h3>
+                  <p>Email:example@gmail.com</p>
+                  <p>Mobile No : +91 324254845</p>
+                  <a href="https://www.youtube.com/" target="_blank">
+                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9wMjCnv58j4T7fieC-I9cfljcZXgavEGMOA&s" alt="YouTube" />
+                  </a>
+                  <a href="https://www.instagram.com/jamia_millia_islamia/" target="_blank">
+                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf9S9d91kF5OXsoG5ggiP-DQPgfmdS1WlXqg&s" alt="Instagram" />
+                  </a>
+                  <a href="https://twitter.com/jamia_millia" target="_blank">
+                      <img src="data:image/jpeg;base64,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" alt="Twitter" />
+                  </a>
+              </div>
+              <div class="google-map">
+                <h3>Find Us Here</h3>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.9776401724725!2d77.59636731495319!3d28.57975528239972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390c1cfb31535e7b%3A0xe743b79db0df9941!2sJamia%20Millia%20Islamia!5e0!3m2!1sen!2sin!4v1633914557483!5m2!1sen!2sin"
+                    width="300" height="150" allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+              <div class="rights-reserved">
+                  <h3>© 2024 College Management System</h3>
+                  <p>All Rights Reserved</p>
+                  <strong>
+                      <p>📍Jamia Nagar, New Delhi-110025</p>
+                  </strong>
+              </div>
+  
+             
+          </div>
+      </footer>
+        </section> 
+        <!-- ===== Attendance Section End ===== -->
+        <!-- ===== Complaint Section Start ===== -->
+        <section class="service section" id="services">
+          <header>
+            <h2>कॉलेज प्रबंधन प्रणाली کالج مینیجمنٹ سسٹم</h2>
+            <h1>College Management System</h1>
+            <h3>Jamia Nagar, New Delhi-110025</h3>
+        </header>
+          <div class="container2">
+            <h2>Student Complaint Form</h2>
+            <p>Please use this form to submit a complaint regarding any issue related to your experience as a student.</p>
+            
+            <!-- Full Name -->
+            <div class="row">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="First Name">
+                    <small>First Name</small>
+                </div>
+                <!-- <div class="form-group">
+                    <input type="text" placeholder="Last Name">
+                    <small>Last Name</small>
+                </div> -->
+            </div>
+            
+            <!-- Email Address -->
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" placeholder="example@example.com">
+                <small>Please enter a valid email address.</small>
+            </div>
+            
+            <!-- Phone Number -->
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="text" placeholder="(000) 000-0000">
+                <small>Please enter a valid phone number.</small>
+            </div>
+            
+            <!-- Student ID -->
+            <div class="form-group">
+                <label>Student ID</label>
+                <input type="text" placeholder="Enter your student ID">
+            </div>
+            
+            <!-- Complaint Description -->
+            <div class="form-group">
+                <label>Complaint Description</label>
+                <textarea  rows="4" placeholder="Describe your complaint"></textarea>
+            </div>
+            
+            <!-- Submit Button -->
+            <button class="submit-button">Submit</button>
+        </div>     
+        <footer>
+          <div class="footer-container">
+
+              <div class="social-media">
+                  <h3>Connect with Us</h3>
+                  <p>Email:example@gmail.com</p>
+                  <p>Mobile No : +91 324254845</p>
+                  <a href="https://www.youtube.com/" target="_blank">
+                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9wMjCnv58j4T7fieC-I9cfljcZXgavEGMOA&s" alt="YouTube" />
+                  </a>
+                  <a href="https://www.instagram.com/jamia_millia_islamia/" target="_blank">
+                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf9S9d91kF5OXsoG5ggiP-DQPgfmdS1WlXqg&s" alt="Instagram" />
+                  </a>
+                  <a href="https://twitter.com/jamia_millia" target="_blank">
+                      <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAL4AyQMBIgACEQEDEQH/xAAbAAEAAQUBAAAAAAAAAAAAAAAABwEDBAUGAv/EAEAQAAEDAwIDBQQGCAUFAAAAAAEAAgMEBRESIQYxQRNRYXGBIjKRoRQjUmKxwQcVQkOCktHwM1NjcrIWJVR0wv/EABoBAQACAwEAAAAAAAAAAAAAAAAFBgIDBAH/xAArEQACAgEEAAQFBQEAAAAAAAAAAgEDEQQFEjEhMkGRFSJCUWETI6GxwYH/2gAMAwEAAhEDEQA/AJxREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAERUdyQFUWgoeJaOqvdRasaHxnTE8naUj3gPEdy3rd1kyMs4aDFHV4ysnpERYmQREQBERAEReHBAe1j1dXT0kJmqpo4YhzfI4NHzXMcS8WtoXvo7Y1slU3Z8h3bGfzK4OqnqK2btqud88p31vdnHgO4eC79Nt9l0cm8II3U7nXTPFfGSR6jjSxwuw2oll8YoXkH1xhW2cc2UuAe+qYfvU7/AMgVHOcp5KQ+FVY7kjfjF2eoJet14t1yz9Cq4ZnN95rXe03zHMLPHgoQ0BxDznW05Ds4I8iNx6Lp7DxjV0LmQ3Rz6ql5drzljHj9ofPzXHftj1xyScndpt2SyeLxif4JJQrAkudDDAyeWtgbC9uWyOkADx3jv9FoLhxzQRahQxzVbx1DdEfxO59AVwJVZZOFjJI2X11xl2wdblAVwdgrLpxJeGzVkmijpT2nZReywu/ZB6nv9F3bea9uqmpuLdnlFy3LyXo9IiLUbgiIgCw7vVChtdVVH91E5w8wNlmLSca5/wCmK7H2W/8AILOpeTxE/c13NK1s0ekSRWA4Frg4tla7WHA4LXDfIPTdSDwnxS24aKG5EMrsYY/GGzjbcdA7vHqO4R/keq8uaHYB6HII2IPeD0Vl1OkS9cesFV0msfTtnuJ7gm4fkqhR/wAPcZug0Ut9eXMGA2sA3HhIB/yHqu8gkZK1r43texwy1zTkEd4VcuoeluLwWijUV3rySS6iItRuCIiAo7kuY42vjrZRtpqR2KqoBAd9hvU/l6rp3bDnhRFxBXfrG9VdRnLQ8xs/2t2H5n1XboNPF1vzdQR+5aiaafl7k1wGBy9e/wAVVEVlKsEREPAqbdVVEB4bFG12sMa132g3dZttt9Tc6ptNSN1PPN3Rg7ysXp135YWZTXW5UsBhpaw08XUQxtaT5nBPzWuznx/b7NlX6ct+5PgSZbqSisFtbE6VjGNGXyyEDU7vOVkWy401yjdLRPMkTXFvaaSGuPhnmo1sdnqOIK8SVEkj4oz9bPI4uPkMnmVKNJBHTQsghaGRxtDWtHQBVzVVRU2GbLepaNHdNq5VcLHRfREXIdwREQBYF+pjWWaspx70kTg3zxss9UdyXqzxmJgxdeSzBCLd2gqq2/FNqda7tKGtxTzEyREdM8x6H5ELUK3VWRYkNHqUu2tqnlG9B64WdabzcLM/NBMOxzl1PINUZ8gPd9PgsFEsqWyMNGRXY9bcknEkjWjjS21uGVZ+g1HLEzhocfB/L44PgulY4OwWnIIyCFCZDSCHbg8wRzWVb7jXW0j9X1ksDf8ALDtUZ/gOw9MKJu2r1rn3JijePS2PYmVFHdDx3XxDFfQwzgftwOMZPocj5rcU3Hdplx28dXTn78Or5sJUe+jvTtSTr12ns6Y6ateY6SaQc2xuI+ChSPOhp7xv5qUZOJ7FVU74hc4GmRpaA86Tk+BUXsB0DOMjY4UltSyvLMY6/wBIreHhuHGc9/4ekRFMEKERF4AiIgKLd8OcPzXqUvL+zpWHD353J5kD0IWlUgfo4H/bKv8A9n/4auPXXNVTyXs7dvoS67i/R0lvpIKGmZT0sYZE0bALJCqirUzMzmS2RERGICIi8PQiIgCwL3cY7Vb31kzHvjY5oc2MAncgbfFZ61XFFKaywV0DRlxiJb5jcfgskiJaIbowsmYSZXs19RPZuK6F1NDWRmT3owfZkid36TuPguAuVvqrZUmnq4y13NpHuvHeD/eFgvZHM1pfGHY3GRnCuanaAzW/QOTS4kDyHIKx6fStROFbK/Yq2q1aaiMsuGCKgVV3HCEREAREXgCIiAIiIAiIgCIiAclI36O49NgMn+ZUPPwOn8lHPmpW4Sp/o3DtCzq6PtP5iXfmovdWxVEfeSX2dc3S32g3CKgVVAljCIiAIiIAvLhkL0qO5ICJOIrabVdZYA3ELj2kR+6enpyWtUrcRWaK8UJicdErMuik+yfHwUYV1HUUFS6mq4jHI3p0PiD1Csmh1UXJCz5oKtr9JNL8o8slhERdxHBERAEREAREQBERAEREARE6hAe6endV1EVMzYzPDPicKZ4mNjY2NmzWtAHkFHPAVD9JvBqn+5Ss1D/c7YfLKkkKA3S3lbCx6Fk2irjVLz6lURFGEsEREAREQBERAUdyWhvM3D9Y59FdKqlbNH0kla17MjmMrfO5Lhf0g2oh0d0iYSA0RzAdBvpPzwt+mSHtiJbH5ObVvKVS0Ln8Glu1ot9MdVDe6GaM8o3zDX8s5+AWl6kDGFXGOgGNiAis9SOkYZslTtdHbKLgIiLYagiIgCIiAIiIAiIgCJ+PRb3g+0/rK6B8rc01OQ5/i79kf33LXdYtSS7ehtpqa14RfU7XhC2/q2zxteMTS/WSeBPIegwt4qDmqqpu8u0tPclyrSK1hY6gIiLEzCIiAIiIAiIgCs1ETJ4XxStDmPGlzT1CvIg7It4k4dms8pliDpKJ3uvAyY/uu/qtHjCmqRjZGlj2hzTsQRkFcvdOCqOpe6ShkNLIdy0DLM+XT0UzptzjHG33IHV7VOeVPsR6i39VwhdKVrn/AFEkbd3PEmnA9VoPUEZwCOSla7q7fJOSIspsq864CIi2GoIiIAiIgCIqsZJJIyOFrnPecNDeZKTOOz2Iz4F2jpZa2pjpqduqSQ4aOnmfBSxY7bFaaCOlh30jLn9XOPMla3hTh8WmEzTgOrJBhzh+yOekfBdCFXdfq/1m4r5YLNt2j/QXm/mkqiIo8kwiIgCIiAIiIAi8vzjYZK5e58S1tpk0VlmeWZ2limBY71wMeoWaIzzhezCyxa4y3R1RVFwr/wBIDiMxWrf78+PwBWDUccXWXIhhpKcfxSH8QPkuldBqJ+k5G3LTL9RI7iAMk4wufu/F1st2pkchqqhv7uAggHxdyCj2tulxuAP0ytnlYf3erSz+UDCxAAAMDGNh4Ltp2rx/cn2OC7ePSqP+ybS83yvvLsVL+zp8+zTxEgevV397LWHGSAiKWrrSteKRiCGsse1uTzmQiIthrCIiAInnn0W3s3DtddnNMbDFTnnO8YB8h1WuyxK45NOIM663tbikZk1lPTzVUzIaeN0kjjgNaN1IvDPDcdrDaip0yVZH8MfgP6rYWWyUdoi00zMyEe3K73nLaBQOr183fKngv9li0W3RT87+Lf0Ub8l6RFHEqEREAREQBERAEREAKtyxskYWSNDmHYtIyCriIDlbpwXQ1RMlE76LITnAGWH06ei5Wv4Wu9GXE0/bxjk+Eg7eXNSoqFdtWvur8M5j8kfdttFvjjE/ghJw0OLHN0uHMHIPwKKZamjp6raogilH32grVT8JWSc5+h9mf9ORzfkCu9N2T6lI59mePI0SReikWTge1uP1ctQz+MH8QrZ4EoP/ACag/wAv9Fu+J6f8+xo+Fan8e5HyKRmcEWpuNRqH/wAePwWbT8LWaAgiia4/6jy/8SsW3WmOomTNdovnuYgi2Jkk0gjijdI77LQSfkt5b+ErtWEGSIU0Z6ykZ/lG6kunp4qduiCJkbe5jQFeXJZurz5IwdlWzpHjY2TmrVwfb6Eh9QDVSjfMnug+DQujYA0AAAADGAF6RR1lr2Tl5ySlVNdUYSMBERazaEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQFmqqIqaEyzvDGAjJKwae9Uc08sBmayVkojDXbF2Q3l/MPis2tp21dLJA9xa143LQCfnkLXHh6jJYWvmY6N2pjxJlwPsb7g7/Vjnnr3oAziG2vm7Nsrv8Tsw8MOn/DEmc92D8VeN5twa0/So9xkYBPXT+Oyx28OULacQAzdidPsF+xHZ9ng9cFux3XuOx0sUD6drntD4wwloaPZDiRtjHM939UBcbeaAvkY6fQ5knZntGlu+x+G435b+IRt5o5KxlNHKHOkBLXDk4ggEDv559CrMthpJQ/W6Ysky1ze0zlpDQ5vLODob47bYVWWGlilppdUplpgW07y7Jib1aNuWBjfPmgMma6UMD5Y5alrXRYD852OM488YOO5UjvFulnEEdZG6RztIAPM+HwwrD7LDK57u3qGOc7tPZePZcW6S4bcy3IPTc4AO69QWOigbCyNjmtjcCwB2ww4vx5ZQF+tuMFHRT1btUrKcHWIRrO3MenVWai7CGokhFHUve1he0jQ1rwCNRBc4ctQznHhlZNbRR1lHNSOLo45mlrzHgE558wfFYZs8T5KkT1NRMKhoZK1+nBaOQ2AIHPI5e0dt0BjM4no3Bv1FU18mOzY5rQXOOj2eexHaN3O2/NXo+IaGcP7BzpXtgbO6NunUGu5ZyfXPIDcnCv1Fpoqt1XJLEC6piEUhwM6BvgfH8O4K26yUrZu1hfLA4bsERDRGcAZAxjkwDByNuSA9U15hqmA0tNUyE07Z2t0huprugLiAT6435r3bbtDXSRsZDPGZIO2b2jQBpzjmCQTyOx5EK02yQRtdG2eoERpzAWBw908znGc565/JZLaJjayOpbLKBHGYmxDGgDbwz0HVAZyKgVUAREQBERAf//Z" alt="Twitter" />
+                  </a>
+              </div>
+              <div class="google-map">
+                <h3>Find Us Here</h3>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.9776401724725!2d77.59636731495319!3d28.57975528239972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390c1cfb31535e7b%3A0xe743b79db0df9941!2sJamia%20Millia%20Islamia!5e0!3m2!1sen!2sin!4v1633914557483!5m2!1sen!2sin"
+                    width="300" height="150" allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+              <div class="rights-reserved">
+                  <h3>© 2024 College Management System</h3>
+                  <p>All Rights Reserved</p>
+                  <strong>
+                      <p>📍Jamia Nagar, New Delhi-110025</p>
+                  </strong>
+              </div>
+  
+             
+          </div>
+      </footer>
+      </section>
+        <!-- ===== Complaint Section End ===== -->
+        <!-- ===== Internal marks Section Start ===== -->
+        <section class="portfolio section" id="portfolio">
+          <header>
+            <h2>कॉलेज प्रबंधन प्रणाली کالج مینیجمنٹ سسٹم</h2>
+            <h1>College Management System</h1>
+            <h3>Jamia Nagar, New Delhi-110025</h3>
+        </header>
+          <div class="container6">
+            <h1>Assignment Section</h1>
+            
+            <div class="assignment-upload">
+                <h2>Upload Assignment</h2>
+                <select id="assignmentSelector">
+                    <option value="" disabled selected>Select Assignment</option>
+                    <option value="Assignment 1">Assignment 1</option>
+                    <option value="Assignment 2">Assignment 2</option>
+                    <!-- Add more assignments as needed -->
+                </select>
+                <input type="file" id="fileUpload" />
+                <button onclick="uploadAssignment()">Upload</button>
+            </div>
+            
+            <div class="previous-assignments">
+                <h2>Previous Submissions</h2>
+                <ul id="submissionList">
+                    <!-- List of previous submissions will be displayed here -->
+                </ul>
+            </div>
+        </div>
+        <footer>
+          <div class="footer-container">
+
+              <div class="social-media">
+                  <h3>Connect with Us</h3>
+                  <p>Email:example@gmail.com</p>
+                  <p>Mobile No : +91 324254845</p>
+                  <a href="https://www.youtube.com/" target="_blank">
+                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9wMjCnv58j4T7fieC-I9cfljcZXgavEGMOA&s" alt="YouTube" />
+                  </a>
+                  <a href="https://www.instagram.com/jamia_millia_islamia/" target="_blank">
+                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf9S9d91kF5OXsoG5ggiP-DQPgfmdS1WlXqg&s" alt="Instagram" />
+                  </a>
+                  <a href="https://twitter.com/jamia_millia" target="_blank">
+                      <img src="data:image/jpeg;base64,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" alt="Twitter" />
+                  </a>
+              </div>
+              <div class="google-map">
+                <h3>Find Us Here</h3>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.9776401724725!2d77.59636731495319!3d28.57975528239972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390c1cfb31535e7b%3A0xe743b79db0df9941!2sJamia%20Millia%20Islamia!5e0!3m2!1sen!2sin!4v1633914557483!5m2!1sen!2sin"
+                    width="300" height="150" allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+              <div class="rights-reserved">
+                  <h3>© 2024 College Management System</h3>
+                  <p>All Rights Reserved</p>
+                  <strong>
+                      <p>📍Jamia Nagar, New Delhi-110025</p>
+                  </strong>
+              </div>
+  
+             
+          </div>
+      </footer>
+            </section>
+
+            <!-- Update Profile section -->
+        <section class="portfolio section" id="update">
+          <header>
+            <h2>कॉलेज प्रबंधन प्रणाली کالج مینیجمنٹ سسٹم</h2>
+            <h1>College Management System</h1>
+            <h3>Jamia Nagar, New Delhi-110025</h3>
+        </header>
+               <!-- Update profile  -->
+               <div class="container4">
+                <h2>Update Profile</h2>
+                
+                <!-- Profile picture preview -->
+                <img id="profilePreview" class="preview-image" src="#" alt="Profile Picture Preview" style="display: none;">
+                
+                <!-- Form to update profile -->
+                <div class="form-group">
+                    <label for="profilePicture">Update Profile Picture:</label>
+                    <input type="file" id="profilePicture" accept="image/*" onchange="previewProfilePicture(event)">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Update Email:</label>
+                    <input type="email" id="email" placeholder="Enter your new email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Update Phone Number:</label>
+                    <input type="tel" id="phone" placeholder="Enter your new phone number">
+                </div>
+                
+                <button class="submit-button">Save Changes</button>
+            </div>
+
+            <footer>
+              <div class="footer-container">
+      
+                  <div class="social-media">
+                      <h3>Connect with Us</h3>
+                      <p>Email:example@gmail.com</p>
+                      <p>Mobile No : +91 324254845</p>
+                      <a href="https://www.youtube.com/" target="_blank">
+                          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9wMjCnv58j4T7fieC-I9cfljcZXgavEGMOA&s" alt="YouTube" />
+                      </a>
+                      <a href="https://www.instagram.com/jamia_millia_islamia/" target="_blank">
+                          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf9S9d91kF5OXsoG5ggiP-DQPgfmdS1WlXqg&s" alt="Instagram" />
+                      </a>
+                      <a href="https://twitter.com/jamia_millia" target="_blank">
+                          <img src="data:image/jpeg;base64,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" alt="Twitter" />
+                      </a>
+                  </div>
+                  <div class="google-map">
+                    <h3>Find Us Here</h3>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.9776401724725!2d77.59636731495319!3d28.57975528239972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390c1cfb31535e7b%3A0xe743b79db0df9941!2sJamia%20Millia%20Islamia!5e0!3m2!1sen!2sin!4v1633914557483!5m2!1sen!2sin"
+                        width="300" height="150" allowfullscreen="" loading="lazy">
+                    </iframe>
+                </div>
+                  <div class="rights-reserved">
+                      <h3>© 2024 College Management System</h3>
+                      <p>All Rights Reserved</p>
+                      <strong>
+                          <p>📍Jamia Nagar, New Delhi-110025</p>
+                      </strong>
+                  </div>
+      
+                 
+              </div>
+          </footer>
+            </section>
+           
+         
+          
+        <!-- ===== Portfolio Section End ===== -->
+        <!-- ===== Event Approval Section Start ===== -->
+        <section class="contact section" id="contact">
+          <header>
+            <h2>कॉलेज प्रबंधन प्रणाली کالج مینیجمنٹ سسٹم</h2>
+            <h1>College Management System</h1>
+            <h3>Jamia Nagar, New Delhi-110025</h3>
+        </header>
+          <div class="container1">
+            <h2>Event Request Form</h2>
+     
+            <h3>Submitter Information </h3>
+            <!-- Name -->
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" placeholder="First Name">
+                <input type="text" placeholder="Last Name" style="margin-top: 5px;">
+            </div>
+    
+            <!-- Email -->
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" placeholder="example@email.com">
+            </div>
+    
+            <!-- Event Information -->
+            <h2>Event Information</h2>
+            
+            <div class="form-group">
+                <label>Event Title</label>
+                <input type="text" placeholder="Enter event title">
+            </div>
+    
+            <div class="form-group">
+                <label>Event Category</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox"> Community Outreach</label>
+                    <label><input type="checkbox"> Member Support/Appreciation</label>
+                    <label><input type="checkbox"> Education</label>
+                    <label><input type="checkbox"> Networking</label>
+                    <label><input type="checkbox"> Fundraising</label>
+                    <label><input type="checkbox"> Other</label>
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <label>Location of Event</label>
+                <select>
+                    <option>Please Select</option>
+                    <option>Location 1</option>
+                    <option>Location 2</option>
+                </select>
+            </div>
+    
+            <div class="form-group">
+                <label>Event Date</label>
+                <input type="date">
+            </div>
+    
+            <div class="form-group">
+                <label>All Day Event</label>
+                <label><input type="radio" name="allDayEvent" value="No"> No</label>
+                <label><input type="radio" name="allDayEvent" value="Yes"> Yes</label>
+            </div>
+    
+            <div class="form-group">
+                <label>Event Start Time</label>
+                <input type="time">
+            </div>
+    
+            <div class="form-group">
+                <label>Event End Time</label>
+                <input type="time">
+            </div>
+    
+            <div class="form-group">
+                <label>Repeating Event</label>
+                <select>
+                    <option>Please Select</option>
+                    <option>None</option>
+                    <option>Daily</option>
+                    <option>Weekly</option>
+                    <option>Monthly</option>
+                </select>
+            </div>
+    
+            <div class="form-group">
+                <label>Description of Event</label>
+                <textarea rows="3" placeholder="Enter event description"></textarea>
+            </div>
+    
+            <!-- Advertisement -->
+            <h2>Advertisement</h2>
+    
+            <div class="form-group">
+                <label>Do you need Marketing support?</label>
+                <select>
+                    <option>Please Select</option>
+                    <option>Yes</option>
+                    <option>No</option>
+                </select>
+            </div>
+    
+            <div class="form-group">
+                <label>If yes, what type of Marketing Support?</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox"> Social Media</label>
+                    <label><input type="checkbox"> Newspaper</label>
+                    <label><input type="checkbox"> Radio</label>
+                    <label><input type="checkbox"> Website</label>
+                    <label><input type="checkbox"> Other</label>
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <label>Will there be tickets sold?</label>
+                <select>
+                    <option>Please Select</option>
+                    <option>Yes</option>
+                    <option>No</option>
+                </select>
+            </div>
+    
+            <div class="form-group">
+                <label>If yes, then how much are tickets?</label>
+                <input type="text" placeholder="Enter ticket price">
+            </div>
+    
+            <div class="form-group">
+                <label>Upload Event Image</label>
+                <div class="file-upload">Browse Files</div>
+            </div>
+    
+            <div class="form-group">
+                <label>Upload Any Additional Files</label>
+                <div class="file-upload">Browse Files</div>
+            </div>
+    
+            <div class="form-group">
+                <label>Sponsor/Partner</label>
+                <select>
+                    <option>Please Select</option>
+                    <option>Sponsor 1</option>
+                    <option>Sponsor 2</option>
+                </select>
+            </div>
+    
+            <div class="form-group">
+                <label>If yes, who are they?</label>
+                <textarea rows="3" placeholder="Enter sponsor/partner details"></textarea>
+            </div>
+    
+            <!-- Submit Button -->
+            <button class="submit-button">Submit</button>
+        </div>
+        <footer>
+          <div class="footer-container">
+              <div class="contact" id="contact">
+                  <h3>Contact</h3>
+                  <p>Opening Hours: <br></p>
+                  <p>Monday to Friday <br></p>
+                  <p>9:00 A.M. to 5:00 P.M. <br></p>
+                  <p>Email: info@cms.com <br></p>
+                  <p>Mobile No- +91 8978251456</p>
+              </div>
+  
+              <div class="social-media">
+                  <h3>Connect with Us</h3>
+                  <a href="https://www.youtube.com/" target="_blank">
+                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9wMjCnv58j4T7fieC-I9cfljcZXgavEGMOA&s" alt="YouTube" />
+                  </a>
+                  <a href="https://www.instagram.com/jamia_millia_islamia/" target="_blank">
+                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf9S9d91kF5OXsoG5ggiP-DQPgfmdS1WlXqg&s" alt="Instagram" />
+                  </a>
+                  <a href="https://twitter.com/jamia_millia" target="_blank">
+                      <img src="data:image/jpeg;base64,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" alt="Twitter" />
+                  </a>
+              </div>
+  
+              <div class="rights-reserved">
+                  <h3>© 2024 College Management System</h3>
+                  <p>All Rights Reserved</p>
+                  <strong>
+                      <p>📍Jamia Nagar, New Delhi-110025</p>
+                  </strong>
+              </div>
+  
+              <div class="google-map">
+                  <h3>Find Us Here</h3>
+                  <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.9776401724725!2d77.59636731495319!3d28.57975528239972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390c1cfb31535e7b%3A0xe743b79db0df9941!2sJamia%20Millia%20Islamia!5e0!3m2!1sen!2sin!4v1633914557483!5m2!1sen!2sin"
+                      width="300" height="150" allowfullscreen="" loading="lazy">
+                  </iframe>
+              </div>
+          </div>
+      </footer>
+        </section>
+        <!-- ===== Event Approval Section End ===== -->
+      </div>
+    </div>
+      <!-- ===== Main Content End ===== -->
+    </div>
+    
+    <!-- ===== JS Files ===== -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"
+      referrerpolicy="no-referrer"></script>
+    <script src="script.js"></script>
+    <!-- <script src="js/style-switcher.js"></script> -->
+  </body>
+</html>
