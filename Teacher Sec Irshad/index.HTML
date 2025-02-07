@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Teacher's Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: green;
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 30px;
+            color: white;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .profile {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+        }
+
+        .profile img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid green;
+        }
+
+        .profile h3 {
+            margin: 0;
+            font-size: 20px;
+            letter-spacing: 1px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            width: 100%;
+            padding: 5px;
+            margin: 0;
+        }
+
+        .nav-item {
+            padding: 15px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            transition: background 0.3s;
+        }
+
+        .nav-item a {
+            color: white;
+            text-decoration: none;
+            width: 100%;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-item i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        .nav-item:hover {
+            background: whitesmoke;
+            color: #000;
+        }
+
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+
+        }
+
+        .section {
+            display: none;
+        }
+
+        header {
+            background: white;
+            color: green;
+            padding: 20px 0;
+            margin-left: 250px;
+            text-align: center;
+            border-radius: 0;
+        }
+
+        header h1 {
+            font-size: 30px;
+        }
+
+        header h2 {
+            font-size: 20px;
+        }
+
+        header h3 {
+            color: green;
+            font-size: 16px;
+        }
+
+        footer {
+            background-color: green;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            width: calc(100% - 300px);
+            margin-left: 250px;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .contact,
+        .social-media,
+        .rights-reserved,
+        .google-map {
+            margin: 10px;
+        }
+
+        .contact p,
+        .rights-reserved p {
+            color: white;
+        }
+
+        .social-media img {
+            width: 30px;
+            margin: 5px;
+        }
+
+        .google-map iframe {
+            border: none;
+            height: 200px;
+        }
+
+        .content {
+            padding-bottom: 90px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h2>कॉलेज प्रबंधन प्रणाली کالج مینیجمنٹ سسٹم</h2>
+        <h1>College Management System</h1>
+        <h3>Jamia Nagar, New Delhi-110025</h3>
+    </header>
+
+    <div class="sidebar">
+        <div class="profile">
+            <img id="profilePicture" src="default_photo.jpg" alt="Profile Picture">
+        </div>
+        <h3>Irshad Ansari</h3>
+
+        <ul class="nav-menu">
+            <li class="nav-item" onclick="showSection('attendance-section')">
+                <a href="javascript:void(0);">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Attendance</span>
+                </a>
+            </li>
+            <li class="nav-item" onclick="showSection('assignment-section')">
+                <a href="javascript:void(0);">
+                    <i class="fas fa-tasks"></i>
+                    <span>Assignment</span>
+                </a>
+            </li>
+            <li class="nav-item" onclick="showSection('notice-section')">
+                <a href="javascript:void(0);">
+                    <i class="fas fa-bell"></i>
+                    <span>Notice & Updates</span>
+                </a>
+            </li>
+            <li class="nav-item" onclick="showSection('subjects-section')">
+                <a href="javascript:void(0);">
+                    <i class="fas fa-book"></i>
+                    <span>Subjects Allotted</span>
+                </a>
+            </li>
+            <li class="nav-item" onclick="showSection('update-profile-section')">
+                <a href="javascript:void(0);">
+                    <i class="fas fa-user-edit"></i>
+                    <span>Update Profile</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div class="section" id="attendance-section">
+            <style>
+                body,
+                html {
+                    margin: 0;
+                    padding: 0;
+                    font-family: 'Arial', sans-serif;
+                    background-color: #f0f2f5;
+                }
+
+                .attendance-content {
+                    padding: 20px;
+                    margin: 40px auto;
+                    width: 95%;
+                }
+
+                h2 {
+                    color: #2c3e50;
+                    text-align: center;
+                    margin-bottom: 20px;
+                }
+
+                .attendance-table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin: 20px 0;
+                    background: rgb(118, 214, 118);
+                    box-shadow: 0 0 10px rgba(1, 1, 1, 0.2);
+                    border-radius: 8px;
+                    overflow: hidden;
+                }
+
+                .attendance-table thead {
+                    background: rgb(118, 214, 118);
+                    color: rgb(14, 13, 13);
+                }
+
+                .attendance-table th,
+                .attendance-table td {
+                    padding: 15px;
+                    text-align: center;
+                    border-bottom: 1px solid #ecf0f1;
+                }
+
+                .attendance-table tbody tr:nth-child(even) {
+                    background: #f7f7f7;
+                }
+
+                button {
+                    padding: 10px 20px;
+                    border: none;
+                    cursor: pointer;
+                    border-radius: 5px;
+                    color: white;
+                }
+
+                .present-btn {
+                    background-color: #27ae60;
+                }
+
+                .absent-btn {
+                    background-color: #e74c3c;
+                }
+
+                button:hover {
+                    opacity: 0.9;
+                }
+
+                th {
+                    font-weight: bold;
+                    color: bl;
+                }
+            </style>
+
+            <body>
+                <div class="attendance-content">
+                    <h2>Student Attendance</h2>
+                    <table class="attendance-table">
+                        <thead>
+                            <tr>
+                                <th>Roll No</th>
+                                <th>Name</th>
+                                <th>Gender</th>
+                                <th>Attendance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>22DCS016</td>
+                                <td>Irshad Ansari</td>
+                                <td>Male</td>
+                                <td>
+                                    <button class="present-btn">P</button>
+                                    <button class="absent-btn">A</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>22DCS018</td>
+                                <td>Kaynat Mozammil</td>
+                                <td>Male</td>
+                                <td>
+                                    <button class="present-btn">P</button>
+                                    <button class="absent-btn">A</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>22DCS024</td>
+                                <td>Md Kaif</td>
+                                <td>Male</td>
+                                <td>
+                                    <button class="present-btn">P</button>
+                                    <button class="absent-btn">A</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>22DCS026</td>
+                                <td>Md Samiul Sayed</td>
+                                <td>Male</td>
+                                <td>
+                                    <button class="present-btn">P</button>
+                                    <button class="absent-btn">A</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>22DCS028</td>
+                                <td>Md Adil Khan</td>
+                                <td>Male</td>
+                                <td>
+                                    <button class="present-btn">P</button>
+                                    <button class="absent-btn">A</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>22DCS029</td>
+                                <td>Md Faizan Rasheed</td>
+                                <td>Male</td>
+                                <td>
+                                    <button class="present-btn">P</button>
+                                    <button class="absent-btn">A</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+        <div class="section" id="assignment-section">
+            <style>
+                #Assign_body {
+                    font-family: Arial, sans-serif;
+                    background-color: #f9f9f9;
+                    padding: 20px;
+                    margin: 0;
+                }
+
+                .assignment-section,
+                .remarks-content {
+                    max-width: 1150px;
+                    margin: 20px auto;
+                    padding: 20px;
+                    background-color: #f4f4f4;
+                    border-radius: 8px;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }
+
+                h2 {
+                    text-align: center;
+                    color: #301A1C;
+                    margin-bottom: 20px;
+                }
+
+                .assignment-form label {
+                    display: block;
+                    margin-bottom: 8px;
+                    font-weight: bold;
+                    color: #301A1C;
+                }
+
+                .assignment-form input[type="text"],
+                .assignment-form input[type="file"] {
+                    width: 100%;
+                    padding: 10px;
+                    margin-bottom: 15px;
+                    border-radius: 4px;
+                    border: 1px solid #ccc;
+                    box-sizing: border-box;
+                }
+
+                .assignment-form button {
+                    background-color: #301A1C;
+                    color: white;
+                    padding: 10px 20px;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    width: 100%;
+                }
+
+                .assignment-form button:hover {
+                    background-color: #523234;
+                }
+
+                .remarks-table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin: 20px 0;
+                    background: linear-gradient(0deg, #b3b3e6, #d3d3f9);
+                    box-shadow: 0 0 10px rgba(1, 1, 1, 0.2);
+                    border-radius: 8px;
+                    overflow: hidden;
+                }
+
+                .remarks-table thead {
+                    background: linear-gradient(0deg, #b3b3e6, #d3d3f9);
+                    color: rgb(0, 0, 0);
+                }
+
+                .remarks-table th,
+                .remarks-table td {
+                    padding: 15px;
+                    text-align: center;
+                    border-bottom: 1px solid #ecf0f1;
+                }
+
+                .remarks-table tbody tr:nth-child(even) {
+                    background: #f7f7f7;
+                }
+
+                .uploaded-file {
+                    color: #007BFF;
+                    text-decoration: none;
+                }
+
+                .submit-button {
+                    background-color: #301A1C;
+                    color: white;
+                    padding: 4px 22px;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    margin-bottom: 0px;
+                    display: block;
+                    width: 100%;
+                }
+
+                .submit-button:hover {
+                    background-color: #523234;
+                }
+            </style>
+            </head>
+
+            <body id="Assign_Body">
+
+                <div class="assignment-section">
+                    <h2>Post an Assignment</h2>
+                    <form action="/upload-assignment" method="post" enctype="multipart/form-data"
+                        class="assignment-form">
+                        <label for="assignment-title">Assignment Title:</label>
+                        <input type="text" id="assignment-title" name="assignment-title" required>
+
+                        <label for="assignment-file">Upload Assignment (PDF):</label>
+                        <input type="file" id="assignment-file" name="assignment-file" accept=".pdf" required>
+
+                        <button type="submit">Upload Assignment</button>
+                    </form>
+                </div>
+
+                <div class="remarks-content">
+                    <h2>Submitted Assignments</h2>
+                    <table class="remarks-table">
+                        <thead>
+                            <tr>
+                                <th>Roll No</th>
+                                <th>Name</th>
+                                <th>Uploaded PDF</th>
+                                <th>Status</th>
+                                <th>Marks</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>22DCS016</td>
+                                <td>Irshad Ansari</td>
+                                <td><a class="uploaded-file" href="path/to/assignment1.pdf" target="_blank">View PDF</a>
+                                </td>
+                                <td>Unchecked</td>
+                                <td><input type="text" placeholder="Marks" style="width: 60px;"></td>
+                                <td><button class="submit-button" onclick="submitMark(this)">Submit</button></td>
+                            </tr>
+                            <tr>
+                                <td>22DCS018</td>
+                                <td>Kaynat Mozammil</td>
+                                <td><a class="uploaded-file" href="path/to/assignment2.pdf" target="_blank">View PDF</a>
+                                </td>
+                                <td>Unchecked</td>
+                                <td><input id="mark" type="text" placeholder="Marks" style="width: 60px;"></td>
+                                <td><button class="submit-button" onclick="submitMark(this)">Submit</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <script>
+                    function submitMark(button) {
+                        const row = button.closest('tr');
+                        const rollNo = row.cells[0].innerText;
+                        const name = row.cells[1].innerText;
+                        const marks = row.cells[2].querySelector('input').value;
+                        const statusCell = row.cells[3];
+
+                        if (!marks) {
+                            alert('Please enter marks before submitting!');
+                            return;
+                        }
+
+                        statusCell.innerText = 'Checked';
+
+                        console.log(`Submitted for ${name} (Roll No: ${rollNo}) with marks: ${marks}`);
+
+                        alert(`Marks for ${name} (Roll No: ${rollNo}) submitted successfully!`);
+                    }
+                </script>
+        </div>
+        <div class="section" id="notice-section">
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    background-color: #f9f9f9;
+                    padding: 20px;
+                    margin: 0;
+                }
+
+                .notice-form {
+                    max-width: 1150px;
+                    margin: 20px auto;
+                    padding: 20px;
+                    background-color: #f4f4f4;
+                    border-radius: 8px;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }
+
+                .notice-form label {
+                    font-weight: bold;
+                    color: #301A1C;
+                    display: block;
+                    margin-bottom: 8px;
+                }
+
+                .notice-form input[type="text"],
+                .notice-form textarea {
+                    width: 98%;
+                    padding: 10px;
+                    margin-bottom: 15px;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+                }
+
+                .notice-form button {
+                    background-color: #301A1C;
+                    color: white;
+                    padding: 10px 20px;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                }
+
+                .notice-form button:hover {
+                    background-color: #523234;
+                }
+
+                h2 {
+                    text-align: center;
+                    color: green;
+                }
+            </style>
+            </head>
+
+            <body>
+
+                <h2>Post a New Notice</h2>
+                <form action="/submit-notice" method="post" class="notice-form">
+                    <label for="title">Notice Title:</label>
+                    <input type="text" id="title" name="title" placeholder="Enter the notice title" required>
+
+                    <label for="content">Notice Content:</label>
+                    <textarea id="content" name="content" rows="5" placeholder="Enter the notice content"
+                        required></textarea>
+
+                    <button type="submit">Post Notice</button>
+                </form>
+
+        </div>
+        <div class="section" id="subjects-section">
+            <h2>Subjects Allotted</h2>
+            <p>Subjects Details</p>
+        </div>
+        <div class="section" id="update-profile-section">
+            <style>
+                body,
+                html {
+                    margin: 0;
+                    padding: 0;
+                    font-family: Arial, sans-serif;
+                    background: #f4f4f4;
+                }
+
+                .profile-form {
+                    margin-top: 20px;
+                    margin-left: 20px;
+                    background-color: white;
+                    padding: 20px;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                    border-radius: 10px;
+                    max-width: 1150px;
+                }
+
+                .profile-form h2 {
+                    margin-bottom: 20px;
+                }
+
+                .profile-form label {
+                    display: block;
+                    margin-bottom: 10px;
+                }
+
+                .profile-form input[type="text"],
+                .profile-form input[type="email"],
+                .profile-form input[type="file"] {
+                    width: 90%;
+                    padding: 10px;
+                    margin-bottom: 20px;
+                    border: 1px solid green;
+                    border-radius: 5px;
+                }
+
+                .preview-container {
+                    margin-bottom: 20px;
+                    text-align: center;
+                }
+
+                .preview-container img {
+                    width: 100px;
+                    height: 100px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    border: 2px solid #ddd;
+                }
+
+                .profile-form button {
+                    padding: 10px 20px;
+                    background-color: green;
+                    color: white;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                }
+
+                .profile-form button:hover {
+                    background-color: white;
+                }
+            </style>
+            </head>
+
+            <body>
+                <div class="profile-form">
+                    <h2>Update Profile</h2>
+
+                    <div class="preview-container">
+                        <img id="profilePicturePreview" src="myphoto.jpg" alt="Profile Picture Preview">
+                    </div>
+
+                    <label for="profilePicture">Update Profile Picture:</label>
+                    <input type="file" id="profilePicture" accept="image/*">
+
+                    <label for="email">Update Email:</label>
+                    <input type="email" id="email" placeholder="Enter your new email" required>
+
+                    <label for="phone">Update Phone Number:</label>
+                    <input type="text" id="phone" placeholder="Enter your new phone number" required>
+
+                    <button type="submit" id="saveChanges">Save Changes</button>
+                </div>
+
+                <script>
+                    const profilePictureInput = document.getElementById('profilePicture');
+                    const profilePicturePreview = document.getElementById('profilePicturePreview');
+                    const saveButton = document.getElementById('saveChanges');
+
+                    profilePictureInput.addEventListener('change', function () {
+                        const file = this.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = function (e) {
+                                profilePicturePreview.src = e.target.result;
+                            }
+                            reader.readAsDataURL(file);
+                        }
+                    });
+
+                    saveButton.addEventListener('click', function () {
+                        const updatedImage = profilePicturePreview.src;
+
+                        localStorage.setItem('profilePicture', updatedImage);
+
+                        alert('Profile updated successfully!');
+                    });
+                </script>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="contact" id="contact">
+                <h3>Contact</h3>
+                <p>Email: info@cms.com <br></p>
+                <p>Mobile No- +91 8978251456</p>
+                <div class="social-media">
+                    <a href="https://www.youtube.com/" target="_blank">
+                        <img src="https://cdn.pixabay.com/photo/2021/05/22/11/38/yt-6273367_1280.png" alt="YouTube" />
+                    </a>
+                    <a href="https://www.instagram.com/jamia_millia_islamia/" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg"
+                            alt="Instagram" />
+                    </a>
+                    <a href="https://twitter.com/jamia_millia" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/X_logo.jpg" alt="Twitter" />
+                    </a>
+                </div>
+            </div>
+            <div class="google-map">
+                <h3>Find Us Here</h3>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.9776401724725!2d77.59636731495319!3d28.57975528239972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390c1cfb31535e7b%3A0xe743b79db0df9941!2sJamia%20Millia%20Islamia!5e0!3m2!1sen!2sin!4v1633914557483!5m2!1sen!2sin"
+                    width="300" height="150" allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+
+            <div class="rights-reserved">
+                <h3>© 2024 College Management System</h3>
+                <p>All Rights Reserved</p>
+                <strong>
+                    <p>📍Jamia Nagar, New Delhi-110025</p>
+                </strong>
+            </div>
+
+        </div>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        showSection('attendance-section');
+
+        window.addEventListener('storage', function (e) {
+            if (e.key === 'profilePicture') {
+                const updatedImage = localStorage.getItem('profilePicture');
+                document.getElementById('profilePicture').src = updatedImage;
+            }
+        });
+
+        const storedImage = localStorage.getItem('profilePicture');
+        if (storedImage) {
+            document.getElementById('profilePicture').src = storedImage;
+        }
+    </script>
+</body>
+
+</html>
